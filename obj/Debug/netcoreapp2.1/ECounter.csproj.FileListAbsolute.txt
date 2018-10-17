@@ -1,0 +1,11 @@
+/Users/anxie/projects/ECounter/bin/Debug/netcoreapp2.1/ECounter.deps.json
+/Users/anxie/projects/ECounter/bin/Debug/netcoreapp2.1/ECounter.runtimeconfig.json
+/Users/anxie/projects/ECounter/bin/Debug/netcoreapp2.1/ECounter.runtimeconfig.dev.json
+/Users/anxie/projects/ECounter/bin/Debug/netcoreapp2.1/ECounter.dll
+/Users/anxie/projects/ECounter/bin/Debug/netcoreapp2.1/ECounter.pdb
+/Users/anxie/projects/ECounter/obj/Debug/netcoreapp2.1/ECounter.csprojAssemblyReference.cache
+/Users/anxie/projects/ECounter/obj/Debug/netcoreapp2.1/ECounter.csproj.CoreCompileInputs.cache
+/Users/anxie/projects/ECounter/obj/Debug/netcoreapp2.1/ECounter.AssemblyInfoInputs.cache
+/Users/anxie/projects/ECounter/obj/Debug/netcoreapp2.1/ECounter.AssemblyInfo.cs
+/Users/anxie/projects/ECounter/obj/Debug/netcoreapp2.1/ECounter.dll
+/Users/anxie/projects/ECounter/obj/Debug/netcoreapp2.1/ECounter.pdb
