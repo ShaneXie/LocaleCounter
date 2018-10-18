@@ -3,23 +3,30 @@ using System.Collections.Generic;
 
 namespace ECounter
 {
+    /// <summary>
+    /// Base CharCounter abstract class
+    /// </summary>
     public abstract class CharCounter
     {
         private int? startNum;
         private int? endNum;
-        protected char? charToCount;
 
         public CharCounter()
         {
 
         }
 
-        public CharCounter(int startNum, int endNum, char charToCount)
+        public CharCounter(int startNum, int endNum)
         {
             SetRange(startNum, endNum);
-            SetChar(charToCount);
         }
 
+        /// <summary>
+        /// Set and validate range
+        /// </summary>
+        /// <param name="startNum"></param>
+        /// <param name="endNum"></param>
+        /// <returns></returns>
         public CharCounter SetRange(int startNum, int endNum)
         {
             if (startNum < Config.COUNTER_RANGE_MIN)
@@ -34,22 +41,13 @@ namespace ECounter
             return this;
         }
 
-        public CharCounter SetChar(char charToCount)
-        {
-            this.charToCount = charToCount;
-            return this;
-        }
-
-
-        public Dictionary<int, int> Count
-        {
-            get
-            {
-                return doCount();
-            }
-        }
-
-        private Dictionary<int, int> doCount()
+        /// <summary>
+        /// loop thru number range and count the char
+        /// return the result dictionary
+        /// </summary>
+        /// <param name="ch"></param>
+        /// <returns></returns>
+        public Dictionary<int, int> Count(char ch)
         {
             if (startNum == null || endNum == null)
                 throw new CounterRangeException("Range not set");
@@ -61,23 +59,46 @@ namespace ECounter
 
             for (int num = startNum.Value; num <= endNum; num++)
             {
-                countDict.Add(num, charCount(num));
+                countDict.Add(num, charCount(num, ch));
             }
 
             return countDict;
         }
 
-        private int charCount(int number)
+        /// <summary>
+        /// translate number to words and count
+        /// </summary>
+        /// <param name="number"></param>
+        /// <param name="ch"></param>
+        /// <returns></returns>
+        private int charCount(int number, char ch)
         {
             int count = 0;
             string numStr = numToWords(number);
             foreach (char c in numStr)
-                if (c == charToCount)
+                if (c == ch)
                     count++;
-            Console.WriteLine($"number of {charToCount}: {count}");
+            Log.info($"number of {ch}: {count}");
             return count;
         }
 
+        /// <summary>
+        /// abstract funtion for child to implement to translate words
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         protected abstract string numToWords(int number);
+
+        /// <summary>
+        /// static function to print a given dictionary
+        /// </summary>
+        /// <param name="dict"></param>
+        static public void PrintDict(Dictionary<int, int> dict)
+        {
+            foreach (var item in dict)
+            {
+                Console.WriteLine($"({item.Key}, {item.Value})");
+            }
+        }
     }
 }

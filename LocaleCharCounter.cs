@@ -9,10 +9,11 @@ namespace ECounter
     {
         private CharCounter counter;
 
-        public LocaleCharCounter() : this(Config.LOCALE) { }
-        public LocaleCharCounter(string locale)
+        public LocaleCharCounter() : this(null, null, Config.LOCALE) { }
+        public LocaleCharCounter(int? startNum, int? endNum) : this(startNum, endNum, Config.LOCALE) { }
+        public LocaleCharCounter(int? startNum, int? endNum, string locale)
         {
-            this.counter = createCounterByLocale(locale);
+            this.counter = createCounterByLocale(startNum, endNum, locale);
         }
 
         public CharCounter Counter
@@ -23,19 +24,30 @@ namespace ECounter
             }
         }
 
-        private CharCounter createCounterByLocale(string locale)
+        /// <summary>
+        /// creater function to create CharCounter instance
+        /// </summary>
+        /// <param name="startNum"></param>
+        /// <param name="endNum"></param>
+        /// <param name="locale"></param>
+        /// <returns></returns>
+        private CharCounter createCounterByLocale(int? startNum, int? endNum, string locale)
         {
-            CharCounter charCounter;
+            bool withRange = startNum != null && endNum != null;
+            CharCounter charCounter = withRange ?
+                new EnglishCharCounter(startNum.Value, endNum.Value) :
+                new EnglishCharCounter();
+
             switch (locale)
             {
                 case "en":
-                    charCounter = new EnglishCharCounter();
                     break;
                 case "zh":
-                    charCounter = new ChineseCharCounter();
+                    charCounter = withRange ?
+                        new ChineseCharCounter(startNum.Value, endNum.Value) :
+                        new ChineseCharCounter();
                     break;
                 default:
-                    charCounter = new EnglishCharCounter();
                     break;
             }
             return charCounter;

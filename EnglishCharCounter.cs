@@ -6,14 +6,14 @@ namespace ECounter
     public class EnglishCharCounter : CharCounter
     {
         public EnglishCharCounter() { }
-        public EnglishCharCounter(int startNum, int endNum, char charToCount) : base(startNum, endNum, charToCount)
+        public EnglishCharCounter(int startNum, int endNum) : base(startNum, endNum)
         {
 
         }
         protected override string numToWords(int number)
         {
             string words = numToEnglishWords(number);
-            Console.WriteLine($"{number} in English words: {words}");
+            Log.info($"{number} in English words: {words}");
             return words;
         }
 

@@ -6,17 +6,22 @@ namespace ECounter
     public class ChineseCharCounter : CharCounter
     {
         public ChineseCharCounter() { }
-        public ChineseCharCounter(int startNum, int endNum, char charToCount) : base(startNum, endNum, charToCount)
+        public ChineseCharCounter(int startNum, int endNum) : base(startNum, endNum)
         {
 
         }
         protected override string numToWords(int number)
         {
             string words = numToEnglishWords(number);
-            Console.WriteLine($"{number} in Chinese words: {words}");
+            Log.info($"{number} in Chinese words: {words}");
             return words;
         }
 
+        /// <summary>
+        /// recursive funtion to translate number to english word
+        /// </summary>
+        /// <param name="number"></param>
+        /// <returns></returns>
         private static string numToEnglishWords(int number)
         {
             if (number == 0)
